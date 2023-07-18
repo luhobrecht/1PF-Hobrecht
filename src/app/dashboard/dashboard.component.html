@@ -1,17 +1,24 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p>Auto-resizing sidenav</p>
-      <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Toggle extra text
+      <p></p>
+      <button class="mb-4 mt-4" mat-icon-button>
+        <mat-icon >home</mat-icon>
+      </button>
+      <div class="w-100 d-none d-md-block"></div>
+      <button class="mb-4" mat-icon-button>
+        <mat-icon >group</mat-icon>
+      </button>
+      <div class="w-100 d-none d-md-block"></div>
+      <button class="mb-4" mat-icon-button>
+        <mat-icon >school</mat-icon>
       </button>
     </mat-drawer>
     <div class="example-sidenav-content">
         <mat-toolbar>
             <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
              <mat-icon>menu</mat-icon>
-           </button>
-           <span>My App</span>
+            </button>
+           <span>Dashboard App</span>
            <span class="example-spacer"></span>
            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
              <mat-icon>favorite</mat-icon>

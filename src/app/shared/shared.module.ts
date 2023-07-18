@@ -9,10 +9,19 @@ import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { FullNamePipe } from './pipes/full-name.pipe';
+import { ValidationsPipe } from './pipes/validations.pipe';
+import { FontSizeDirective } from './directives/font-size.directive';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    FullNamePipe,
+    ValidationsPipe,
+    FontSizeDirective
+  ],
   imports: [
     CommonModule,
 
@@ -25,7 +34,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule,
+    MatTableModule,
+    FullNamePipe,
+    ValidationsPipe,
+    FontSizeDirective,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

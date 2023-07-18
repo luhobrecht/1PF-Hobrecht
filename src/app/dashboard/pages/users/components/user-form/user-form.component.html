@@ -1,0 +1,51 @@
+<h1 mat-dialog-title class="text-center" appFontSize >Crear usuario</h1>
+<div mat-dialog-content>
+    <form [formGroup]="userForm" class="row row-cols-2 justify-content-center">
+        <mat-form-field class="col-5" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name" type="text" name="name"/>
+            <mat-error *ngFor="let error of nameControl.errors | keyvalue" >
+                {{ error | validations }}
+            </mat-error>
+        </mat-form-field>
+        <div class="w-100 d-none d-md-block"></div>
+        <mat-form-field class="col-5" appearance="outline">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="surname" type="text" name="surname"/>
+            <mat-error *ngFor="let error of surnameControl.errors | keyvalue" >
+                {{ error | validations }}
+            </mat-error>
+        </mat-form-field>
+        <div class="w-100 d-none d-md-block"></div>
+        <mat-form-field class="col-5" appearance="outline">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput formControlName="email" type="text" name="email"/>
+            <mat-error *ngFor="let error of emailControl.errors | keyvalue" >
+                {{ error | validations }}
+            </mat-error>
+        </mat-form-field>
+        <div class="w-100 d-none d-md-block"></div>
+        <mat-form-field class="col-5" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="password" type="text" name="password"/>
+            <mat-error *ngFor="let error of passwordControl.errors | keyvalue" >
+                {{ error | validations }}
+            </mat-error>
+        </mat-form-field>
+        <div class="w-100 d-none d-md-block"></div>
+        <mat-form-field class="col-5" appearance="outline">
+            <mat-label>Tipo de Usuario</mat-label>
+            <mat-select formControlName="role">
+                <mat-option value="alumno">Alumno</mat-option>
+                <mat-option value="profesor">Profesor</mat-option>
+            </mat-select>
+            <mat-error *ngFor="let error of passwordControl.errors | keyvalue" >
+                {{ error | validations }}
+            </mat-error>
+        </mat-form-field>
+    </form>
+    <div mat-dialog-actions class="col-12 mt-3 justify-content-center">
+        <button type="submit" (click)="onSubmit()" mat-button >Guardar</button>
+        <button mat-button mat-dialog-close >Cancelar</button>
+    </div>
+</div>

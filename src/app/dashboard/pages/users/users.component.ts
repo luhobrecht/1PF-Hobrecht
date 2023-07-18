@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { User } from './models';
+
+
+const ELEMENT_DATA: User[] = [
+  {id: 1, name: 'Harry', surname: 'Potter', email: 'hp@magic.com', password: '123456', role: 'alumno'},
+  {id: 2, name: 'Ron', surname: 'Weasly', email: 'rw@magic.com', password: '123456', role: 'alumno'},
+  {id: 3, name: 'Hermione', surname: 'Granger', email: 'hg@magic.com', password: '123456', role: 'alumno'},
+  {id: 4, name: 'Luna', surname: 'Lovegood', email: 'll@magic.com', password: '123456', role: 'alumno'},
+  {id: 5, name: 'Neville', surname: 'Longbottom', email: 'nl@magic.com', password: '123456', role: 'alumno'}
+];
+
 
 @Component({
   selector: 'app-users',
@@ -7,23 +19,53 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
+  public users: User[] = ELEMENT_DATA;
+  constructor(
+    private matDialog : MatDialog
+  ) {}
+  
+  onCreateUser() : void {
+    const dialogRef = this.matDialog.open(UserFormComponent)
 
-  nameControl = new FormControl( null ,[Validators.required]);
-  surnameControl = new FormControl( null, [Validators.required]);
-  emailControl = new FormControl( null, [Validators.required]);
-  passwordControl = new FormControl( null, [
-    Validators.required,
-    Validators.minLength(6)
-]);
+    dialogRef.afterClosed().subscribe({
+      next: (v) => {
+        if (v) {
+          this.users = [
+            ...this.users,
+            {
+              id: this.users.length + 1,
+              name: v.name,
+              surname: v.surname,
+              email: v.email,
+              password: v.password,
+              role: v.role
+            }
+          ] 
+        } else {
+          console.log("Se canceló")
+        }
+      } 
+    })
+  }
 
-  userForm = new FormGroup({
-      name: this.nameControl,
-      surname: this.surnameControl,
-      email: this.emailControl,
-      password: this.passwordControl,
-  })
+  onDeleteUser(user: User) : void {
+    if (confirm(`¿Quieres eliminar a ${user.name}?`)) {
+      this.users = this.users.filter((u) => u.id !== user.id)
+    }
+  }
 
-  onSubmit() : void {
-    console.log(this.userForm.value)
+  onEditUser (userToEdit: User) : void {
+    const dialogRef = this.matDialog.open(UserFormComponent, { data: userToEdit});
+    dialogRef.afterClosed().subscribe({
+      next: (userUpdated) => {
+        if (userUpdated) {
+          this.users = this.users.map((user) => {
+            return user.id === userToEdit.id
+              ? {...user, ...userUpdated}
+              : user 
+          })
+        }
+      } 
+    })
   }
 }
